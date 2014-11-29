@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SkinnyBand</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="txtCkLembrar">Lembrar minha senha</string>
+    <string name="btnEntarLogin">Login</string>
+    <string name="btnRegistrarLogin">Resgistrar-se</string>
+    <string name="txtSenhaLogin">Senha</string>
+    <string name="txtUsuarioLogin">Usuário</string>
+    <string name="txtMensagemLogin">Insira usuário e senha</string>
+    <string name="action_search">Buscar</string>
+    
+
+
+</resources>

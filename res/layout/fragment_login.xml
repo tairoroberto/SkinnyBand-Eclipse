@@ -1,0 +1,114 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativePaiFragment"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="#000000"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/relativeFragment1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true" >
+
+        <TextView
+            android:id="@+id/txt_Fragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text=""
+            android:textColor="#32c904" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeFragment2"
+        android:layout_width="wrap_content"
+        android:layout_height="260dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" >
+
+        <Button
+            android:id="@+id/btnLoginFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/meubotao_verde"
+            android:fontFamily="serif"
+            android:text="Login"
+            android:textSize="36sp" />
+
+        <CheckBox
+            android:id="@+id/chLembrarFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btnLoginFragment"
+            android:layout_alignParentLeft="true"
+            android:checked="true"
+            android:text="@string/txtCkLembrar"
+            android:textColor="#32c904" />
+
+        <EditText
+            android:id="@+id/edtSenhaLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/textView1"
+            android:ems="10"
+            android:fontFamily="serif"
+            android:inputType="textPassword"
+            android:textColor="#ffffff"
+            android:textSize="22sp"
+            android:hint="@string/txtSenhaLogin"
+            android:textColorHint="#ffffff"
+            android:gravity="center">
+
+
+        </EditText>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="14dp"
+            android:gravity="center_horizontal"
+            android:textColor="#32c904" />
+
+        <EditText
+            android:id="@+id/edtUsuarioLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/textView2"
+            android:ems="10"
+            android:fontFamily="serif"
+            android:gravity="center"
+            android:inputType="textPersonName"
+            android:textColor="#ffffff"
+            android:textSize="22sp"
+            android:hint="@string/txtUsuarioLogin"
+            android:textColorHint="#ffffff">
+            <requestFocus />
+        </EditText>
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/edtUsuarioLogin"
+            android:gravity="center_horizontal"
+            android:textColor="#32c904" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
