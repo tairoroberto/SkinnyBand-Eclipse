@@ -5,10 +5,8 @@ import java.util.Locale;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -22,14 +20,19 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
 
-public class PrincipalActivity extends ActionBarActivity {
+public class ShowsActivity extends ActionBarActivity {
 	
 	
 	   private DrawerLayout mDrawerLayout;
@@ -38,7 +41,7 @@ public class PrincipalActivity extends ActionBarActivity {
 
 	    private CharSequence mDrawerTitle;
 	    private CharSequence mTitle;
-	    private String[] mPlanetTitles;   
+	    private String[] mGenerosTitles;   
 	    
 	    private SearchView searchView; 
     
@@ -49,7 +52,7 @@ public class PrincipalActivity extends ActionBarActivity {
 
 		// Coloca um efeito antes de mostrar a tela principal
 		overridePendingTransition(R.anim.push_right_enter,R.anim.push_left_exit);
-		setContentView(R.layout.activity_shows);
+		setContentView(R.layout.activity_background_main);
 
 		// mostra o logo do app na actionbar
 		ActionBar actionBar = getSupportActionBar();
@@ -61,7 +64,7 @@ public class PrincipalActivity extends ActionBarActivity {
 			mTitle = mDrawerTitle = getTitle();
 			//Pega um array de String para colocar no drawer
 			
-	        mPlanetTitles = getResources().getStringArray(R.array.generos_array);
+	        mGenerosTitles = getResources().getStringArray(R.array.generos_array);
 	        //Linka o DrawerLayout do java com o xml
 	        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 	        
@@ -72,33 +75,35 @@ public class PrincipalActivity extends ActionBarActivity {
 	        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 	        
 	        // set up the drawer's list view with items and click listener
-	        mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item_genero, mPlanetTitles));
+	        mDrawerList.setAdapter(new ArrayAdapter<String>(ShowsActivity.this, R.layout.drawer_lista_items, mGenerosTitles));
 	        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 	        
 	        // ActionBarDrawerToggle ties together the the proper interactions
 	        // between the sliding drawer and the action bar app icon
 	        mDrawerToggle = new ActionBarDrawerToggle(
-	                PrincipalActivity.this,    /* Classe que chama a activity Activity */
+	                ShowsActivity.this,    /* Classe que chama a activity Activity */
 	                mDrawerLayout,         /* Layout que será mostrado DrawerLayout  */
 	                R.drawable.ic_drawer,  /* Icone que aparecera na ActionBar */
 	                R.string.drawer_open  /* Descrição */
-	                ) {
-	       
-	        //Método chamado quando o fragment é fechado	
+		) {
+
+			// Método chamado quando o fragment é fechado
 			public void onDrawerClosed(View view) {
-				Toast.makeText(PrincipalActivity.this, "Teste Drawer close", Toast.LENGTH_SHORT).show();
+				//Toast.makeText(ShowsActivity.this, "Teste Drawer close",Toast.LENGTH_SHORT).show();
 			}
-			//Método chamado quando o fragment é aberto	
-			public void onDrawerOpened(View drawerView) {				
-				Toast.makeText(PrincipalActivity.this, "Teste Drawer open", Toast.LENGTH_SHORT).show();
+
+			// Método chamado quando o fragment é aberto
+			public void onDrawerOpened(View drawerView) {
+				//Toast.makeText(ShowsActivity.this, "Teste Drawer open",	Toast.LENGTH_SHORT).show();
 			}
+			
 		};
-		
+
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
 		if (savedInstanceState == null) {
 			selectItem(0);
 		}
-		
+
 	}
 
 	    @Override
@@ -106,8 +111,7 @@ public class PrincipalActivity extends ActionBarActivity {
 	        MenuInflater inflater = getMenuInflater();
 	        inflater.inflate(R.menu.principal_menu, menu);
 	        
-	        //Implementa o SearchView
-	       
+	        //Implementa o SearchView	       
             searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
             searchView.setOnQueryTextListener(new SearchFiltro());
 	        return super.onCreateOptionsMenu(menu);        
@@ -135,7 +139,7 @@ public class PrincipalActivity extends ActionBarActivity {
 	            if (intent.resolveActivity(getPackageManager()) != null) {
 	                startActivity(intent);
 	            } else {
-	                Toast.makeText(PrincipalActivity.this, R.string.app_not_available, Toast.LENGTH_LONG).show();
+	                Toast.makeText(ShowsActivity.this, R.string.app_not_available, Toast.LENGTH_LONG).show();
 	            }
 				return false;
 			}
@@ -181,15 +185,19 @@ public class PrincipalActivity extends ActionBarActivity {
 	        // Atualiza o contaienr principal trocando o fragment
 	        Fragment fragment = new ShowFragment();
 	        Bundle args = new Bundle();
-	        args.putInt(ShowFragment.ARG_PLANET_NUMBER, position);
+	        args.putInt(ShowFragment.ARG_OPCAO_NUMBER, position);
 	        fragment.setArguments(args);
 
 	        FragmentManager fragmentManager = getFragmentManager();
-	        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+	        String opcao = getResources().getStringArray(R.array.generos_array)[position];
+	        
+
+	        	fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();	
+	     
 
 	        //Atualiza o item selecionado e titulo, depois fecha o Drawer
 	        mDrawerList.setItemChecked(position, true);
-	        setTitle(mPlanetTitles[position]);
+	        setTitle(mGenerosTitles[position]);
 	        mDrawerLayout.closeDrawer(mDrawerList);
 	    }
 
@@ -225,24 +233,57 @@ public class PrincipalActivity extends ActionBarActivity {
 		 * Fragment que aparece no "content_frame", mostra a imagem de im planeta
 		 */
 	    public static class ShowFragment extends Fragment {
-	        public static final String ARG_PLANET_NUMBER = "planet_number";
+	        public static final String ARG_OPCAO_NUMBER = "opcao_number";
 
 	        public ShowFragment() {
 	        	//Contrutor vazio para a subclasse fragment
 	        }
 
 	        @Override
-	        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-	                Bundle savedInstanceState) {
-	            View rootView = inflater.inflate(R.layout.fragment_shows, container, false);
-	            int i = getArguments().getInt(ARG_PLANET_NUMBER);
-	            String planet = getResources().getStringArray(R.array.generos_array)[i];
+	        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	        	
+	        	View rootView;
+	        	int i = getArguments().getInt(ARG_OPCAO_NUMBER);
+	            String opcao = getResources().getStringArray(R.array.generos_array)[i];
+	        
+	      
+				rootView = inflater.inflate(R.layout.shows_principais,container, false);
+				int imageId = getResources().getIdentifier(
+						opcao.toLowerCase(Locale.getDefault()), "drawable",	getActivity().getPackageName());
+				
+				((ImageView) rootView.findViewById(R.id.img1)).setImageResource(imageId);
+				((ImageView) rootView.findViewById(R.id.img2)).setImageResource(imageId);
+				((ImageView) rootView.findViewById(R.id.img3)).setImageResource(imageId);
+				((ImageView) rootView.findViewById(R.id.img4)).setImageResource(imageId);
+				((ImageView) rootView.findViewById(R.id.img5)).setImageResource(imageId);
+				((ImageView) rootView.findViewById(R.id.img6)).setImageResource(imageId);
+				
+			
+				//Quando a imagem pe clicada mostra um efeito de ZOOM
+				((ImageView) rootView.findViewById(R.id.img1)).setOnClickListener(new CliqueInimacao());
+				((ImageView) rootView.findViewById(R.id.img2)).setOnClickListener(new CliqueInimacao());
+				((ImageView) rootView.findViewById(R.id.img3)).setOnClickListener(new CliqueInimacao());
+				((ImageView) rootView.findViewById(R.id.img4)).setOnClickListener(new CliqueInimacao());
+				((ImageView) rootView.findViewById(R.id.img5)).setOnClickListener(new CliqueInimacao());
+				((ImageView) rootView.findViewById(R.id.img6)).setOnClickListener(new CliqueInimacao());
+				
+				getActivity().setTitle(opcao);
 
-	            int imageId = getResources().getIdentifier(planet.toLowerCase(Locale.getDefault()),
-	                            "drawable", getActivity().getPackageName());
-	            ((ImageView) rootView.findViewById(R.id.image)).setImageResource(imageId);
-	            getActivity().setTitle(planet);
-	            return rootView;
+			return rootView;
+
+		}
+	        //Classe para imlemantar o clique do imageView
+	        private class CliqueInimacao implements OnClickListener{
+	        	//Animaçãço da Imagem
+	        	final  Animation in = AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.zoom_in_enter);
+				@Override
+				public void onClick(View v) {
+					v.startAnimation(in);
+		             v.setVisibility(View.VISIBLE);					
+				}	        	
 	        }
-	    }
+	       
+	}
+	    
+	    
 }

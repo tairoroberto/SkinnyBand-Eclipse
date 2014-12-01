@@ -1,0 +1,95 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativePaiFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center|center_horizontal"
+    android:background="#000000"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/relativeFragment2"
+        android:layout_width="350dp"
+        android:layout_height="220dp"
+        android:layout_centerHorizontal="true" >
+
+        <Button
+            android:id="@+id/btnLoginFragment"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/meubotao_verde"
+            android:fontFamily="serif"
+            android:text="Login"
+            android:textSize="25sp" />
+
+        <CheckBox
+            android:id="@+id/chLembrarFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btnLoginFragment"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="3dp"
+            android:checked="true"
+            android:text="@string/txtCkLembrar"
+            android:textColor="#32c904" />
+
+        <EditText
+            android:id="@+id/edtSenhaLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/textView1"
+            android:ems="10"
+            android:fontFamily="serif"
+            android:inputType="textPassword"
+            android:textColor="#ffffff"
+            android:textSize="22sp"
+            android:hint="@string/txtSenhaLogin"
+            android:textColorHint="#ffffff"
+            android:gravity="center">
+
+
+        </EditText>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="14dp"
+            android:gravity="center_horizontal"
+            android:textColor="#32c904" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/edtUsuarioLogin"
+            android:gravity="center_horizontal"
+            android:textColor="#32c904" />
+
+        <EditText
+            android:id="@+id/edtUsuarioLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/textView2"
+            android:ems="10"
+            android:fontFamily="serif"
+            android:gravity="center"
+            android:hint="@string/txtUsuarioLogin"
+            android:inputType="textPersonName"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff"
+            android:textSize="22sp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

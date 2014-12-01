@@ -153,7 +153,7 @@ public class InicialActivity extends Activity {
             public void onClick(View v) {
 
                 Intent intent = new Intent();
-                intent.setClass(InicialActivity.this, PrincipalActivity.class);
+                intent.setClass(InicialActivity.this, ShowsActivity.class);
 
                 overridePendingTransition(R.anim.push_down_enter, R.anim.push_down_exit);
                 startActivity(intent);

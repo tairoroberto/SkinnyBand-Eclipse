@@ -11,14 +11,23 @@
     <string name="txtUsuarioLogin">Usuário</string>
     <string name="txtMensagemLogin">Insira usuário e senha</string>
     <string name="action_search">Buscar</string>
-
+    
+    <!-- Arrays preenchidos para serem mostrados nos fragments -->
     <string-array name="generos_array">
+        <item>Principais Shows</item>
         <item>Rock</item>
         <item>Reggae</item>
         <item>Eletronica</item>
         <item>Forro</item>
         <item>Samba</item>
         <item>Axe</item>
+    </string-array>
+    
+    <string-array name="eventos_array">
+        <item>Principais Eventos</item>
+        <item>Worshops</item>
+        <item>Encontros</item>
+        <item>Festas da cidade</item>
     </string-array>
 
     <string name="drawer_open">Open navigation drawer</string>
