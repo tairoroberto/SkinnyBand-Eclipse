@@ -11,7 +11,19 @@
     <string name="txtUsuarioLogin">Usuário</string>
     <string name="txtMensagemLogin">Insira usuário e senha</string>
     <string name="action_search">Buscar</string>
-    
 
+    <string-array name="generos_array">
+        <item>Rock</item>
+        <item>Reggae</item>
+        <item>Eletronica</item>
+        <item>Forro</item>
+        <item>Samba</item>
+        <item>Axe</item>
+    </string-array>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="action_websearch">Web search</string>
+    <string name="app_not_available">Sorry, there\'s no web browser available</string>
 
 </resources>
