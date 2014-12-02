@@ -63,7 +63,7 @@ public class CadastroActivity extends ActionBarActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent();
-                intent.setClass(CadastroActivity.this, ShowsActivity.class);
+                intent.setClass(CadastroActivity.this, PrincipalActivity.class);
                 startActivity(intent);
                 dialog.dismiss();
             }

@@ -12,7 +12,16 @@
     <string name="txtMensagemLogin">Insira usuário e senha</string>
     <string name="action_search">Buscar</string>
     
-    <!-- Arrays preenchidos para serem mostrados nos fragments -->
+    <!-- Arrays preenchidos para serem mostrados nos fragments -->    
+        <string-array name="telas_array">
+        <item>Home</item>
+        <item>Shows</item>
+        <item>Eventos</item>
+        <item>Lojas</item>
+        <item>Studios</item>
+        <item>Ultilitarios</item>
+    </string-array>
+    
     <string-array name="generos_array">
         <item>Principais Shows</item>
         <item>Rock</item>
@@ -25,10 +34,42 @@
     
     <string-array name="eventos_array">
         <item>Principais Eventos</item>
-        <item>Worshops</item>
+        <item>Workshops</item>
         <item>Encontros</item>
         <item>Festas da cidade</item>
     </string-array>
+    
+   <string-array name="lojas_array">
+       <item>Principais Lojas</item>
+        <item>Loja do Zé</item>
+        <item>Baterias e sax</item>
+        <item>Bass optimus</item>
+        <item>Guitar max</item>
+    </string-array>
+    
+   <string-array name="studios_array">
+        <item>Principais Studios</item>
+        <item>Studio santana</item>
+        <item>Max Studio</item>
+        <item>Bass and groove</item>
+        <item>RHCP Studio</item>
+    </string-array>   
+    
+   <string-array name="utilitarios_array">
+       <item>Afinador</item>
+        <item>Compass</item>
+        <item>Music Player</item>
+        <item>Video Player</item>
+   </string-array>
+    
+   <string-array name="conteudo_list_right_array">
+        <item>Contatos</item>
+        <item>Meus eventos</item>
+        <item>Music Player</item>
+        <item>Video Player</item>
+        <item>Mensagens</item>
+    </string-array>
+
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>

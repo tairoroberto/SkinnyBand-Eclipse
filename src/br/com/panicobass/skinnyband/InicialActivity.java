@@ -1,23 +1,15 @@
 package br.com.panicobass.skinnyband;
 
-import android.animation.AnimatorInflater;
-import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ViewFlipper;
-
-import java.security.Principal;
 
 /**
  * Created by tairo on 24/11/14.
@@ -113,6 +105,7 @@ public class InicialActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(InicialActivity.this,CadastroActivity.class);                
                 startActivity(intent);
+                finish();
             }
         });
     }
@@ -153,12 +146,12 @@ public class InicialActivity extends Activity {
             public void onClick(View v) {
 
                 Intent intent = new Intent();
-                intent.setClass(InicialActivity.this, ShowsActivity.class);
+                intent.setClass(InicialActivity.this, PrincipalActivity.class);
 
                 overridePendingTransition(R.anim.push_down_enter, R.anim.push_down_exit);
                 startActivity(intent);
-
                 dialog.dismiss();
+                InicialActivity.this.finish();
             }
 
         });

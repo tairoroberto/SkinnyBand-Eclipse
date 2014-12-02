@@ -27,21 +27,20 @@ import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.widget.ViewFlipper;
+
 
 public class ShowsActivity extends ActionBarActivity {
 	
 	
-	   private DrawerLayout mDrawerLayout;
-	    private ListView mDrawerList;
+	    private DrawerLayout mDrawerLayout;
+	    private ListView mDrawerList_left,mDrawerList_right;
 	    private ActionBarDrawerToggle mDrawerToggle;
 
 	    private CharSequence mDrawerTitle;
 	    private CharSequence mTitle;
-	    private String[] mGenerosTitles;   
+	    private String[] mGenerosTitles,lista_fragment_right;   
 	    
 	    private SearchView searchView; 
     
@@ -51,7 +50,7 @@ public class ShowsActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 
 		// Coloca um efeito antes de mostrar a tela principal
-		overridePendingTransition(R.anim.push_right_enter,R.anim.push_left_exit);
+		overridePendingTransition(R.anim.push_left_enter,R.anim.push_right_exit);
 		setContentView(R.layout.activity_background_main);
 
 		// mostra o logo do app na actionbar
@@ -64,19 +63,27 @@ public class ShowsActivity extends ActionBarActivity {
 			mTitle = mDrawerTitle = getTitle();
 			//Pega um array de String para colocar no drawer
 			
+			//Coloca os resources nas variáveis 
 	        mGenerosTitles = getResources().getStringArray(R.array.generos_array);
+	        lista_fragment_right = getResources().getStringArray(R.array.conteudo_list_right_array);
+	        
 	        //Linka o DrawerLayout do java com o xml
 	        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 	        
 	        //Linka o ListView do java com o xml
-	        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+	        mDrawerList_left = (ListView) findViewById(R.id.left_drawer);
+	        mDrawerList_right = (ListView) findViewById(R.id.right_drawer);
 
 	        //  Configura uma sombra personalizada quando o Drawer é aberto
 	        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 	        
-	        // set up the drawer's list view with items and click listener
-	        mDrawerList.setAdapter(new ArrayAdapter<String>(ShowsActivity.this, R.layout.drawer_lista_items, mGenerosTitles));
-	        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+	        //Configura a lista do Drawer com os items do array e seta o evento de clique da lista
+	        //configura a lista da direita e esqueda do Drawer
+	        mDrawerList_left.setAdapter(new ArrayAdapter<String>(ShowsActivity.this, R.layout.drawer_lista_items, mGenerosTitles));
+	        mDrawerList_left.setOnItemClickListener(new DrawerItemClickListenerLeft());
+	        
+	        mDrawerList_right.setAdapter(new ArrayAdapter<String>(ShowsActivity.this, R.layout.drawer_lista_items, lista_fragment_right));
+	        mDrawerList_right.setOnItemClickListener(new DrawerItemClickListenerRight());
 	        
 	        // ActionBarDrawerToggle ties together the the proper interactions
 	        // between the sliding drawer and the action bar app icon
@@ -101,7 +108,8 @@ public class ShowsActivity extends ActionBarActivity {
 
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
 		if (savedInstanceState == null) {
-			selectItem(0);
+			selectItemRight(0);
+			selectItemLeft(0);			
 		}
 
 	}
@@ -149,9 +157,11 @@ public class ShowsActivity extends ActionBarActivity {
 	    /* Called whenever we call invalidateOptionsMenu() */
 	    @Override
 	    public boolean onPrepareOptionsMenu(Menu menu) {
-	        // Se o drawer for aberto, esconde os items de ações  relatados para o cotainer 
-	        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-	        menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
+	    	 // Se o drawer for aberto, esconde os items de ações  relatados para o cotainer 
+	        boolean drawerLeftOpen = mDrawerLayout.isDrawerOpen(mDrawerList_left);
+	        boolean drawerRightOpen = mDrawerLayout.isDrawerOpen(mDrawerList_right);
+	        menu.findItem(R.id.action_settings).setVisible(!drawerLeftOpen);
+	        menu.findItem(R.id.action_settings).setVisible(!drawerRightOpen);
 	        return super.onPrepareOptionsMenu(menu);
 	    }
 
@@ -174,32 +184,59 @@ public class ShowsActivity extends ActionBarActivity {
 	    }
 
 	    /* Captura o evento de click da lista de items do drawer */
-	    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+	    private class DrawerItemClickListenerLeft implements ListView.OnItemClickListener {
 	        @Override
 	        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-	            selectItem(position);
+	        	selectItemLeft(position);
 	        }
 	    }
 
-	    private void selectItem(int position) {
+	    private void selectItemLeft(int position) {
 	        // Atualiza o contaienr principal trocando o fragment
 	        Fragment fragment = new ShowFragment();
 	        Bundle args = new Bundle();
 	        args.putInt(ShowFragment.ARG_OPCAO_NUMBER, position);
+	        args.putInt(ShowFragment.NOME_ARRAY_STRING, R.array.generos_array);
 	        fragment.setArguments(args);
 
-	        FragmentManager fragmentManager = getFragmentManager();
-	        String opcao = getResources().getStringArray(R.array.generos_array)[position];
-	        
+	        FragmentManager fragmentManager = getFragmentManager();	        
 
-	        	fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();	
+	        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();	
 	     
 
 	        //Atualiza o item selecionado e titulo, depois fecha o Drawer
-	        mDrawerList.setItemChecked(position, true);
+	        mDrawerList_left.setItemChecked(position, true);
 	        setTitle(mGenerosTitles[position]);
-	        mDrawerLayout.closeDrawer(mDrawerList);
+	        mDrawerLayout.closeDrawer(mDrawerList_left);
 	    }
+	    
+	    
+	    /* Captura o evento de click da lista de items do drawer */
+	    private class DrawerItemClickListenerRight implements ListView.OnItemClickListener {
+	        @Override
+	        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+	        	selectItemRight(position);
+	        }
+	    }
+
+	    private void selectItemRight(int position) {
+	        // Atualiza o contaienr principal trocando o fragment
+	        Fragment fragment = new ShowFragment();
+	        Bundle args = new Bundle();
+	        args.putInt(ShowFragment.ARG_OPCAO_NUMBER, position);
+	        args.putInt(ShowFragment.NOME_ARRAY_STRING, R.array.conteudo_list_right_array);
+	        fragment.setArguments(args); 
+
+	        FragmentManager fragmentManager = getFragmentManager();	             
+
+	        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();		     
+
+	        //Atualiza o item selecionado e titulo, depois fecha o Drawer
+	        mDrawerList_right.setItemChecked(position, true);
+	        setTitle(lista_fragment_right[position]);
+	        mDrawerLayout.closeDrawer(mDrawerList_right);       	
+		}
+	    
 
 	    
 	    //Muda o titulo da ActionBar
@@ -234,6 +271,7 @@ public class ShowsActivity extends ActionBarActivity {
 		 */
 	    public static class ShowFragment extends Fragment {
 	        public static final String ARG_OPCAO_NUMBER = "opcao_number";
+	        public static final String NOME_ARRAY_STRING = "nome_array_string";
 
 	        public ShowFragment() {
 	        	//Contrutor vazio para a subclasse fragment
@@ -244,10 +282,10 @@ public class ShowsActivity extends ActionBarActivity {
 	        	
 	        	View rootView;
 	        	int i = getArguments().getInt(ARG_OPCAO_NUMBER);
-	            String opcao = getResources().getStringArray(R.array.generos_array)[i];
+	        	 String opcao = getResources().getStringArray(getArguments().getInt(NOME_ARRAY_STRING))[i];
 	        
 	      
-				rootView = inflater.inflate(R.layout.shows_principais,container, false);
+				rootView = inflater.inflate(R.layout.principais_shows,container, false);
 				int imageId = getResources().getIdentifier(
 						opcao.toLowerCase(Locale.getDefault()), "drawable",	getActivity().getPackageName());
 				
