@@ -91,8 +91,7 @@ public class PrincipalActivity extends ActionBarActivity{
 	        		PrincipalActivity.this,    /* Classe que chama a activity Activity */
 	                mDrawerLayout,         /* Layout que será mostrado DrawerLayout  */
 	                R.drawable.ic_drawer,  /* Icone que aparecera na ActionBar */
-	                R.string.drawer_open  /* Descrição */
-		) {
+	                R.string.drawer_open){ /* Descrição */
 
 			// Método chamado quando o fragment é fechado
 			public void onDrawerClosed(View view) {

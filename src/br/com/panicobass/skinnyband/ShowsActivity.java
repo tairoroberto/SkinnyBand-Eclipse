@@ -7,6 +7,7 @@ import android.app.FragmentManager;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -26,9 +27,11 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 
 public class ShowsActivity extends ActionBarActivity {
@@ -37,6 +40,8 @@ public class ShowsActivity extends ActionBarActivity {
 	    private DrawerLayout mDrawerLayout;
 	    private ListView mDrawerList_left,mDrawerList_right;
 	    private ActionBarDrawerToggle mDrawerToggle;
+	    
+	    ToggleButton toggleButton;
 
 	    private CharSequence mDrawerTitle;
 	    private CharSequence mTitle;
@@ -56,8 +61,6 @@ public class ShowsActivity extends ActionBarActivity {
 		// mostra o logo do app na actionbar
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
-		
-		
 		
 		
 			mTitle = mDrawerTitle = getTitle();
@@ -317,8 +320,8 @@ public class ShowsActivity extends ActionBarActivity {
 				@Override
 				public void onClick(View v) {
 					v.startAnimation(in);
-		             v.setVisibility(View.VISIBLE);					
-				}	        	
+		             v.setVisibility(View.VISIBLE);	
+		        }       	
 	        }
 	       
 	}

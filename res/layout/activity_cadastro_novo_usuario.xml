@@ -5,20 +5,6 @@
     android:background="@color/primary_material_dark"
     android:orientation="vertical" >
     
-   
-   <ScrollView
-        android:id="@+id/scrollView1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/primary_material_dark"
-            android:orientation="vertical" >
-        </LinearLayout>
-    </ScrollView>
-    
 <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -32,19 +18,20 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="1dp"
-            android:layout_weight="1" >
+            android:layout_weight="1"
+            android:background="#000000" >
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/imgBtnFoto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                 android:layout_alignParentEnd="true"
-                android:layout_margin="5dp"
+                android:layout_margin="3dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_action_user" />
 
@@ -125,12 +112,30 @@
         android:layout_weight="1.2"
         android:orientation="vertical" >
 
-        <Button
-            android:id="@+id/button1"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.7"
-            android:background="@drawable/login_fb" />
+            android:layout_weight="0.7" >
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:scaleType="fitXY"
+                android:src="@drawable/fb_ic" />
+
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:background="#4b67a1"
+                android:text="Login com Facebook"
+                android:textColor="#fff"
+                android:textSize="18sp" />
+
+        </LinearLayout>
 
         <EditText
             android:id="@+id/edtNomeUsuario_cadastro"
@@ -179,7 +184,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.7"
+        android:layout_weight="0.6"
         android:orientation="vertical" >
 
         <TextView
