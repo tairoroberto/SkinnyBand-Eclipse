@@ -2,10 +2,16 @@ package br.com.panicobass.skinnyband;
 
 
 
+
+
 import android.app.Dialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.ImageButton;
@@ -15,6 +21,8 @@ import android.widget.ImageView;
  * Created by tairo on 28/11/14.
  */
 public class CadastroActivity extends ActionBarActivity {
+	public static final int SELECT_CAMERA_IMG = 11;
+	public static final int SELECT_INTERNAL_IMG = 12;
 	
 	ImageButton imgBtnFoto_fragment,imgBtnGaleria_fragment;
 	ImageView imgBtnFoto;
@@ -67,7 +75,7 @@ public class CadastroActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
             	Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-        		startActivityForResult(intent,0);
+        		startActivityForResult(intent,SELECT_CAMERA_IMG);
                 dialog.dismiss();
             }
 
@@ -80,33 +88,57 @@ public class CadastroActivity extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				// Vai para a galeria para escolher uma foto
-				 Intent intent = new Intent();
-	             intent.setClass(CadastroActivity.this, PrincipalActivity.class);
-	             startActivity(intent);
+				Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+				intent.setType("image/*");
+				startActivityForResult(intent, SELECT_INTERNAL_IMG);
 	             dialog.dismiss();				
 			}        	
         });
     }
     
-    /************************************************************************/
-    /**		Pega o resultado da chamada da activity que chamou a camera		*/
-    /************************************************************************/
+    /*****************************************************************************/
+    /**	Pega o resultado da chamada da activity que chamou a camera	ou a foto	*/
+    /***************************************************************************/
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, intent);
-		//verifica se a intent retornada não é nula
-		if (intent != null) {
-			//se não for nulo a gente pega a foto
-			Bundle bundle = intent.getExtras();
-			//verifica novamente se não é nullo
-			if (bundle != null) {
-				Bitmap img = (Bitmap) bundle.get("data");
+		
+		//verifica se a intent retornada não é nula da damera
+		if (requestCode == SELECT_CAMERA_IMG) {
+			if (resultCode == RESULT_OK) { 
 				
-				//coloca a imagem no imageview
-				ImageView image = (ImageView)findViewById(R.id.imgBtnFoto);
-						image.setImageBitmap(img);
+				//se não for nulo a gente pega a foto
+				Bundle bundle = intent.getExtras();
+				
+				//verifica novamente se não é nullo
+				if (bundle != null) {
+					Bitmap img = (Bitmap) bundle.get("data");					
+					//coloca a imagem no imageview
+					ImageView image = (ImageView)findViewById(R.id.imgBtnFoto);
+					image.setImageBitmap(img);
+				}
 			}
-		}		
+		}
+		
+		if (requestCode == SELECT_INTERNAL_IMG) {
+			
+			if (resultCode == RESULT_OK) { //verifica se o resultado esta OK
+				Uri imagemSelecionada = intent.getData(); 
+				String[] colunas = {MediaStore.Images.Media.DATA};//pega a coluna que referancia a imagem
+				Cursor cursor = getContentResolver().query(imagemSelecionada, colunas, null, null, null);
+				cursor.moveToFirst();
+				
+				int indexColuna = cursor.getColumnIndex(colunas[0]);
+				String pathImage = cursor.getString(indexColuna);
+				cursor.close();
+				
+				//passa o resultado da busca para um BITMAP
+				Bitmap img = BitmapFactory.decodeFile(pathImage);
+				ImageView image = (ImageView)findViewById(R.id.imgBtnFoto);
+				image.setImageBitmap(img);
+				image.setImageBitmap(img);
+			}
+		}
 	}
 }
