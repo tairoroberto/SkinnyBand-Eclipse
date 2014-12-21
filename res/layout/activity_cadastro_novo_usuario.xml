@@ -56,6 +56,7 @@
                     android:layout_weight="1"
                     android:drawableLeft="@drawable/ic_action_person"
                     android:fontFamily="sans-serif-light"
+                    android:gravity="center_vertical|bottom"
                     android:hint="Usuário"
                     android:inputType="textPersonName"
                     android:textColor="#00FF00"
@@ -70,6 +71,7 @@
                     android:drawableLeft="@android:drawable/ic_lock_idle_lock"
                     android:drawablePadding="5dp"
                     android:fontFamily="sans-serif-light"
+                    android:gravity="center_vertical|bottom"
                     android:hint="Senha"
                     android:inputType="textPassword"
                     android:textColor="#00FF00"
@@ -84,6 +86,7 @@
                     android:drawableLeft="@android:drawable/ic_lock_idle_lock"
                     android:drawablePadding="5dp"
                     android:fontFamily="sans-serif-light"
+                    android:gravity="center_vertical|bottom"
                     android:hint="Repetir senha"
                     android:inputType="textPassword"
                     android:textColor="#00FF00"
@@ -130,7 +133,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
-                android:background="#4b67a1"
+                android:background="@drawable/botao_facebook"
                 android:text="Login com Facebook"
                 android:textColor="#fff"
                 android:textSize="18sp" />
@@ -145,6 +148,7 @@
             android:drawableLeft="@drawable/ic_action_person"
             android:drawablePadding="5dp"
             android:ems="10"
+            android:gravity="bottom|center_vertical"
             android:hint="Nome"
             android:inputType="textPersonName"
             android:textColor="#00FF00"
@@ -161,6 +165,7 @@
             android:drawableLeft="@drawable/ic_action_mail"
             android:drawablePadding="5dp"
             android:ems="10"
+            android:gravity="center_vertical|bottom"
             android:hint="E-mail"
             android:inputType="textEmailAddress"
             android:textColor="#00FF00"
@@ -174,6 +179,7 @@
             android:drawableLeft="@drawable/ic_action_call"
             android:drawablePadding="5dp"
             android:ems="10"
+            android:gravity="center_vertical|bottom"
             android:hint="Telefone (opcional)"
             android:inputType="phone"
             android:textColor="#00FF00"
@@ -220,8 +226,11 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentRight="true"
-                android:background="@drawable/meubotao_verde"
-                android:text="Registrar-se" />
+                android:background="@drawable/botao_verde"
+                android:text="Registrar-se"
+                android:textSize="20sp"
+                android:textStyle="italic"
+                android:typeface="sans" />
 
         </RelativeLayout>
 

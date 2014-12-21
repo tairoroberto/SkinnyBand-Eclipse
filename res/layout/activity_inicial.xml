@@ -96,8 +96,10 @@
                 android:id="@+id/btnLogin_inicial"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/meubotao_verde"
+                android:layout_marginRight="1dp"
+                android:background="@drawable/botao_verde"
                 android:text="Login" />
+
         </RelativeLayout>
 
         <RelativeLayout
@@ -112,8 +114,10 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
-                android:background="@drawable/meubotao_verde"
+                android:layout_marginLeft="1dp"
+                android:background="@drawable/botao_verde"
                 android:text="Cadastrar-se" />
+
         </RelativeLayout>
     </LinearLayout>
 
